@@ -12,9 +12,15 @@ function handleInput(e) {
 function handlePaste(e) {
   const paste = e.clipboardData.getData('text');
   // loop over each input, and populate with the index of that string
+  const len = inputs.length;
+
   inputs.forEach((input, i) => {
     input.value = paste[i] || '';
   });
+
+  if(inputs[len-1].value) {
+  	document.querySelector('form [type="submit"]').focus();
+  }
 }
 
 function handleKeyup(e) {
