@@ -17,6 +17,7 @@ function handlePaste(e) {
   // loop over each input, and populate with the index of that string
   inputs.forEach((input, i) => {
     input.value = paste[i] || '';
+    // input.value = paste[i] ? paste[i] : '';
   });
 
   // if all inputs are filled at once, submit form
@@ -25,6 +26,10 @@ function handlePaste(e) {
     const submitButton = document.querySelector('form [type="submit"]');
     submitButton.focus();
     setTimeout(() => submitButton.click(), 200);
+  }
+  // if all inputs are not filled, focus the first empty input
+  else if(paste.length < len) {
+    inputs[paste.length].focus();
   }
 }
 
