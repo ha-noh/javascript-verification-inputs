@@ -3,9 +3,11 @@ const inputs = form.querySelectorAll('.inputs input');
 
 function handleInput(e) {
   const input = e.target;
+  const nextSibling = input.nextElementSibling;
   // check for data that was inputted and if there is a next input, focus it
-  if (input.nextElementSibling && input.value) {
-    input.nextElementSibling.focus();
+  if (nextSibling && input.value) {
+    nextSibling.focus();
+    nextSibling.select();
   }
 }
 
@@ -22,7 +24,7 @@ function handlePaste(e) {
   if(inputs[len-1].value) {
     const submitButton = document.querySelector('form [type="submit"]');
     submitButton.focus();
-    setTimeout(() => submitButton.click(), 250);
+    setTimeout(() => submitButton.click(), 200);
   }
 }
 
@@ -34,6 +36,7 @@ function handleKeyup(e) {
 		//delete the target input's value first before focusing because of when the keydown event triggers
 		// target.value = '';
 		target.previousElementSibling.focus();
+    target.previousElementSibling.select();
 	}
 }
 
@@ -45,5 +48,3 @@ form.addEventListener('input', handleInput);
  * but fixing that behavior for a single tap is complicated
  */
 form.addEventListener('keyup', handleKeyup);
-
-// 1. select the text when the next input is focued
