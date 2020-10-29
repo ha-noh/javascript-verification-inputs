@@ -11,15 +11,18 @@ function handleInput(e) {
 
 function handlePaste(e) {
   const paste = e.clipboardData.getData('text');
-  // loop over each input, and populate with the index of that string
-  const len = inputs.length;
 
+  // loop over each input, and populate with the index of that string
   inputs.forEach((input, i) => {
     input.value = paste[i] || '';
   });
 
+  // if all inputs are filled at once, submit form
+  const len = inputs.length;
   if(inputs[len-1].value) {
-  	document.querySelector('form [type="submit"]').focus();
+    const submitButton = document.querySelector('form [type="submit"]');
+    submitButton.focus();
+    setTimeout(() => submitButton.click(), 250);
   }
 }
 
@@ -44,4 +47,3 @@ form.addEventListener('input', handleInput);
 form.addEventListener('keyup', handleKeyup);
 
 // 1. select the text when the next input is focued
-// 2. Auto submit the form if all fields are filled after a paste
