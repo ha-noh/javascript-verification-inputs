@@ -15,14 +15,16 @@ function handlePaste(e) {
   const paste = e.clipboardData.getData('text');
 
   // loop over each input, and populate with the index of that string
+  // if the length of the paste is shorter than the number of inputs, simply leave the input fields as is
   inputs.forEach((input, i) => {
-    input.value = paste[i] || '';
+    input.value = paste[i] || input.value;
     // input.value = paste[i] ? paste[i] : '';
   });
 
   // if all inputs are filled at once, submit form
+  // purposefully will not auto submit if the paste length is greater than the number of input fields
   const len = inputs.length;
-  if(inputs[len-1].value) {
+  if(paste.length == len) {
     const submitButton = document.querySelector('form [type="submit"]');
     submitButton.focus();
     setTimeout(() => submitButton.click(), 200);
